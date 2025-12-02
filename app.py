@@ -430,6 +430,35 @@ elif menu == "Evaluasi Model":
 
             # Confusion Matrix
             st.write("### Confusion Matrix")
+            
+            # Penjelasan Confusion Matrix
+            with st.expander("📖 Cara Membaca Confusion Matrix"):
+                st.markdown(
+                    """
+                    **Confusion Matrix** menunjukkan perbandingan antara **prediksi model** dan **hasil sebenarnya (ground truth)**.
+                    
+                    Terdapat 4 komponen utama:
+                    
+                    1. **True Negative (TN)** - Kiri Atas
+                       - Pasien **tidak ada TBC** dan model **benar memprediksi tidak ada TBC** ✅
+                       - Ini adalah **hasil yang baik**
+                    
+                    2. **False Positive (FP)** - Kanan Atas
+                       - Pasien **tidak ada TBC** tapi model **salah memprediksi ada TBC** ❌
+                       - Hasil positif palsu (alarm palsu)
+                    
+                    3. **False Negative (FN)** - Kiri Bawah
+                       - Pasien **ada TBC** tapi model **salah memprediksi tidak ada TBC** ❌
+                       - **Ini adalah kasus paling berbahaya!** (pasien TBC tidak terdeteksi)
+                    
+                    4. **True Positive (TP)** - Kanan Bawah
+                       - Pasien **ada TBC** dan model **benar memprediksi ada TBC** ✅
+                       - Ini adalah **hasil yang baik**
+                    
+                    **Target yang ideal:** Maksimalkan TN dan TP (diagonal utama), minimalkan FP dan FN.
+                    """
+                )
+            
             cm_ann = confusion_matrix(y_true, y_pred_ann)
             cm_rf = confusion_matrix(y_true, y_pred_rf)
 
@@ -448,6 +477,46 @@ elif menu == "Evaluasi Model":
 
             # Classification Reports
             st.write("## 📄 Classification Report")
+            
+            # Penjelasan Classification Report
+            with st.expander("📖 Cara Membaca Classification Report"):
+                st.markdown(
+                    """
+                    **Classification Report** menampilkan metrik detail untuk setiap kelas prediksi (Tidak TBC dan TBC).
+                    
+                    **Penjelasan Kolom:**
+                    
+                    - **Precision (Presisi)**
+                      - Dari semua yang **diprediksi sebagai kelompok ini**, berapa persen yang **benar**?
+                      - Formula: `TP / (TP + FP)`
+                      - Contoh (TBC): Dari 100 pasien yang diprediksi TBC, 98 adalah benar-benar TBC = Presisi 98%
+                      - **Penting untuk:** Mengurangi alarm palsu (False Positive)
+                    
+                    - **Recall (Sensitivitas)**
+                      - Dari semua yang **benar-benar termasuk kelompok ini**, berapa persen yang **terdeteksi**?
+                      - Formula: `TP / (TP + FN)`
+                      - Contoh (TBC): Dari 100 pasien yang benar-benar TBC, 97 terdeteksi = Recall 97%
+                      - **Penting untuk:** Tidak melewatkan kasus (False Negative) — **sangat kritis untuk TBC!**
+                    
+                    - **F1-Score**
+                      - **Rata-rata harmonis** antara Precision dan Recall
+                      - Formula: `2 × (Precision × Recall) / (Precision + Recall)`
+                      - Berguna ketika ingin **balance** antara kedua metrik
+                      - Range: 0 hingga 1 (1 = sempurna)
+                    
+                    - **Support**
+                      - Jumlah sampel **sebenarnya** untuk setiap kelas
+                      - Membantu memahami apakah dataset **balanced** atau **imbalanced**
+                    
+                    **Interpretasi Hasil:**
+                    - **Precision tinggi, Recall rendah** = Model konservatif, jarang memprediksi TBC (banyak False Negative)
+                    - **Precision rendah, Recall tinggi** = Model agresif, sering memprediksi TBC (banyak False Positive)
+                    - **Keduanya tinggi** = Model ideal ✅
+                    
+                    **Untuk kasus TBC, lebih penting Recall tinggi** (tidak boleh melewatkan pasien TBC), meskipun ada False Positive.
+                    """
+                )
+            
             st.subheader("🧠 ANN (Deep Learning) — Classification Report")
             report_ann_dict = classification_report(
                 y_true, y_pred_ann,
