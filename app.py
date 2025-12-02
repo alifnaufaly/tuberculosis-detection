@@ -219,28 +219,115 @@ if menu == "Prediksi":
         horizontal=True
     )
 
-    # Form input gejala (sama seperti aslinya)
+    # Daftar penjelasan untuk setiap gejala
+    symptoms_help = {
+        "CO": "🗣️ Batuk",
+        "NS": "💧 Keringat Malam",
+        "BD": "😮‍💨 Sesak Napas",
+        "FV": "🌡️ Demam",
+        "CP": "❤️ Nyeri Dada",
+        "SP": "🫧 Produksi Dahak",
+        "IS": "🍽️ Nafsu Makan",
+        "LP": "🦵 Nyeri Sendi",
+        "CH": "🥶 Menggigil",
+        "LC": "⚡ Kelelahan",
+        "IR": "😠 Iritabilitas",
+        "LA": "😓 Lesu",
+        "LE": "🦠 Pembengkakan Kelenjar",
+        "LN": "⚖️ Penurunan Berat Badan",
+        "SB": "🩸 Batuk Darah",
+        "BMI": "📊 BMI (Body Mass Index)"
+    }
+    
+    symptoms_descriptions = {
+        "CO": "**0**: Tidak ada batuk | **1**: Batuk ringan (sesekali) | **2**: Batuk sedang (sering) | **3**: Batuk berat (hampir terus-menerus)",
+        "NS": "**0**: Tidak berkeringat di malam hari | **1**: Keringat ringan | **2**: Keringat berlebih di malam hari",
+        "BD": "**0**: Pernapasan normal | **1**: Sesak napas ringan (saat aktivitas berat) | **2**: Sesak napas sedang-berat (saat aktivitas ringan)",
+        "FV": "**0**: Suhu tubuh normal (≤36.5°C) | **1**: Demam ringan (36.5-38°C) | **2**: Demam tinggi (>38°C)",
+        "CP": "**0**: Tidak ada nyeri | **1**: Nyeri ringan | **2**: Nyeri sedang-berat",
+        "SP": "**0**: Tidak ada produksi dahak | **1**: Produksi dahak ringan | **2**: Produksi dahak berlebih",
+        "IS": "**0**: Nafsu makan sangat menurun/tidak makan | **1**: Nafsu makan berkurang | **2**: Nafsu makan agak menurun | **3**: Nafsu makan normal",
+        "LP": "**0**: Tidak ada nyeri sendi | **1**: Nyeri ringan | **2**: Nyeri sedang-berat",
+        "CH": "**0**: Tidak menggigil | **1**: Menggigil ringan | **2**: Menggigil sering",
+        "LC": "**0**: Tidak lelah | **1**: Lelah ringan | **2**: Lelah berkepanjangan",
+        "IR": "**0**: Tidak mudah marah | **1**: Mudah marah ringan | **2**: Mudah marah/hostile",
+        "LA": "**0**: Tidak lesu/normal | **1**: Lesu ringan | **2**: Lesu berat (malas beraktivitas)",
+        "LE": "**0**: Tidak ada pembengkakan | **1**: Pembengkakan ringan | **2**: Pembengkakan sedang | **3**: Pembengkakan berat",
+        "LN": "**0**: Berat badan stabil | **1**: Penurunan ringan (1-3 kg/bulan) | **2**: Penurunan berat (>3 kg/bulan)",
+        "SB": "**0**: Tidak ada batuk darah | **1**: Batuk darah ringan (sedikit) | **2**: Batuk darah berat (banyak)",
+        "BMI": "**0**: BMI <18.5 (kurus) atau >30 (gemuk) | **1**: BMI 18.5-24.9 (normal) | **2**: BMI 25-30 (overweight)"
+    }
+
+    # Form input gejala dengan penjelasan
     col1, col2 = st.columns(2)
 
     with col1:
-        co = st.selectbox("🗣️ Batuk (CO)", [0, 1, 2, 3])
-        ns = st.selectbox("💧 Keringat Malam (NS)", [0, 1, 2])
-        bd = st.selectbox("😮‍💨 Sesak Napas (BD)", [0, 1, 2])
-        fv = st.selectbox("🌡️ Demam (FV)", [0, 1, 2])
-        cp = st.selectbox("❤️ Nyeri Dada (CP)", [0, 1, 2])
-        sp = st.selectbox("🫧 Produksi Dahak (SP)", [0, 1, 2])
-        jis = st.selectbox("🍽️ Nafsu Makan (IS)", [0, 1, 2, 3])
-        lp = st.selectbox("🦵 Nyeri Sendi (LP)", [0, 1, 2])
+        st.caption("**Kolom Kiri**")
+        with st.expander(symptoms_help["CO"]):
+            st.info(symptoms_descriptions["CO"])
+        co = st.selectbox("🗣️ Batuk (CO)", [0, 1, 2, 3], key="co_select")
+        
+        with st.expander(symptoms_help["NS"]):
+            st.info(symptoms_descriptions["NS"])
+        ns = st.selectbox("💧 Keringat Malam (NS)", [0, 1, 2], key="ns_select")
+        
+        with st.expander(symptoms_help["BD"]):
+            st.info(symptoms_descriptions["BD"])
+        bd = st.selectbox("😮‍💨 Sesak Napas (BD)", [0, 1, 2], key="bd_select")
+        
+        with st.expander(symptoms_help["FV"]):
+            st.info(symptoms_descriptions["FV"])
+        fv = st.selectbox("🌡️ Demam (FV)", [0, 1, 2], key="fv_select")
+        
+        with st.expander(symptoms_help["CP"]):
+            st.info(symptoms_descriptions["CP"])
+        cp = st.selectbox("❤️ Nyeri Dada (CP)", [0, 1, 2], key="cp_select")
+        
+        with st.expander(symptoms_help["SP"]):
+            st.info(symptoms_descriptions["SP"])
+        sp = st.selectbox("🫧 Produksi Dahak (SP)", [0, 1, 2], key="sp_select")
+        
+        with st.expander(symptoms_help["IS"]):
+            st.info(symptoms_descriptions["IS"])
+        jis = st.selectbox("🍽️ Nafsu Makan (IS)", [0, 1, 2, 3], key="is_select")
+        
+        with st.expander(symptoms_help["LP"]):
+            st.info(symptoms_descriptions["LP"])
+        lp = st.selectbox("🦵 Nyeri Sendi (LP)", [0, 1, 2], key="lp_select")
 
     with col2:
-        ch = st.selectbox("🥶 Menggigil (CH)", [0, 1, 2])
-        lc = st.selectbox("⚡ Kelelahan (LC)", [0, 1, 2])
-        ir = st.selectbox("😠 Iritabilitas (IR)", [0, 1, 2])
-        la = st.selectbox("😓 Lesu (LA)", [0, 1, 2])
-        le = st.selectbox("🦠 Pembengkakan Kelenjar (LE)", [0, 1, 2, 3])
-        ln = st.selectbox("⚖️ Penurunan Berat Badan (LN)", [0, 1, 2])
-        sb = st.selectbox("🩸 Batuk Darah (SB)", [0, 1, 2])
-        bmi = st.selectbox("📊 BMI (Body Mass Index)", [0, 1, 2])
+        st.caption("**Kolom Kanan**")
+        with st.expander(symptoms_help["CH"]):
+            st.info(symptoms_descriptions["CH"])
+        ch = st.selectbox("🥶 Menggigil (CH)", [0, 1, 2], key="ch_select")
+        
+        with st.expander(symptoms_help["LC"]):
+            st.info(symptoms_descriptions["LC"])
+        lc = st.selectbox("⚡ Kelelahan (LC)", [0, 1, 2], key="lc_select")
+        
+        with st.expander(symptoms_help["IR"]):
+            st.info(symptoms_descriptions["IR"])
+        ir = st.selectbox("😠 Iritabilitas (IR)", [0, 1, 2], key="ir_select")
+        
+        with st.expander(symptoms_help["LA"]):
+            st.info(symptoms_descriptions["LA"])
+        la = st.selectbox("😓 Lesu (LA)", [0, 1, 2], key="la_select")
+        
+        with st.expander(symptoms_help["LE"]):
+            st.info(symptoms_descriptions["LE"])
+        le = st.selectbox("🦠 Pembengkakan Kelenjar (LE)", [0, 1, 2, 3], key="le_select")
+        
+        with st.expander(symptoms_help["LN"]):
+            st.info(symptoms_descriptions["LN"])
+        ln = st.selectbox("⚖️ Penurunan Berat Badan (LN)", [0, 1, 2], key="ln_select")
+        
+        with st.expander(symptoms_help["SB"]):
+            st.info(symptoms_descriptions["SB"])
+        sb = st.selectbox("🩸 Batuk Darah (SB)", [0, 1, 2], key="sb_select")
+        
+        with st.expander(symptoms_help["BMI"]):
+            st.info(symptoms_descriptions["BMI"])
+        bmi = st.selectbox("📊 BMI (Body Mass Index)", [0, 1, 2], key="bmi_select")
 
     # Tombol Prediksi
     if st.button("🔍 Analisa Risiko", type="primary"):
