@@ -76,7 +76,7 @@ with st.sidebar:
         index=0
     )
     st.markdown("---")
-    st.caption("Mini Project • Deteksi TBC Paru")
+    st.caption("Mini Project • Deteksi TBC Paru by alifnaufalyr")
 
 # Daftar nama fitur (untuk evaluasi & kesesuaian dataset)
 FEATURE_COLS = ["CO", "NS", "BD", "FV", "CP", "SP", "IS", "LP",
