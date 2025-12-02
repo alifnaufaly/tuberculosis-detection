@@ -5,9 +5,9 @@ env/
 ENV/
 
 # Model files (optional - uncomment jika model file terlalu besar)
-*.h5
-*.pkl
-*.joblib
+# *.h5
+# *.pkl
+# *.joblib
 
 # Python cache
 __pycache__/
